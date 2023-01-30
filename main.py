@@ -7,14 +7,11 @@ import aiohttp
 import socket
 import configparser
 
-
-WS_ENDPOINT = "wss://zello.io/ws"
-WS_TIMEOUT_SEC = 2
-
-ZelloWS = None
+RWS_ENDPOINT = "wss://svx.439100.ro/wssx/"
+ZWS_ENDPOINT = "wss://zello.io/ws"
+ZWS_TIMEOUT_SEC = 2
 
 def main():
-    global ZelloWS
     try:
         os.chdir("/home/yo3agc/ZelloRoLink")
         config = configparser.ConfigParser()
@@ -86,9 +83,9 @@ async def help_channel(username, password, token, channel):
     try:
         conn = aiohttp.TCPConnector(family = socket.AF_INET, ssl = False)
         async with aiohttp.ClientSession(connector = conn) as session:
-            async with session.ws_connect(WS_ENDPOINT) as zws:
+            async with session.ws_connect(ZWS_ENDPOINT) as zws:
                 ZelloWS = zws
-                await asyncio.wait_for(authenticate(zws, username, password, token, channel), WS_TIMEOUT_SEC)
+                await asyncio.wait_for(authenticate(zws, username, password, token, channel), ZWS_TIMEOUT_SEC)
                 print(f"User {username} has been authenticated on {channel} channel")
                 async for msg in zws:
                     if msg.type == aiohttp.WSMsgType.TEXT:
@@ -97,7 +94,7 @@ async def help_channel(username, password, token, channel):
                             if data["command"] == "on_stream_start" and data["from"] == "RoLink GW":
 #                            if data["command"] == "on_stream_start" and data["from"] == "Yo3AGC":
                                 session = aiohttp.ClientSession()
-                                async with session.ws_connect('wss://svx.439100.ro/wssx/') as rws:
+                                async with session.ws_connect(RWS_ENDPOINT) as rws:
                                     async for msg in rws:
                                         if msg.type == aiohttp.WSMsgType.TEXT:
                                             data = json.loads(msg.data)
