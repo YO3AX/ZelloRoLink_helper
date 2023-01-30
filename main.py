@@ -3,6 +3,7 @@ import asyncio
 import base64
 import json
 import time
+import datetime
 import aiohttp
 import socket
 import configparser
@@ -93,7 +94,8 @@ async def help_channel(username, password, token, channel):
                                                 current_talker=data["talker"]["c"]
                                                 if current_talker!=last_talker:
                                                     msg_txt = "Vorbeste: "+current_talker
-                                                    print(msg_txt)
+                                                    log_txt = msg_txt + " @ " + datetime.datetime.now()
+                                                    print(log_txt)
                                                     await zws.send_str(json.dumps({
                                                         "command": "send_text_message",
                                                         "seq": 3,
