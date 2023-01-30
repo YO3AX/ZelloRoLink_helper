@@ -1,3 +1,3 @@
-# ZelloRoLink_utilities
+# ZelloRoLink_helper
 
-This code is supposed to help enhance the RoLink.network Zello crosslinked Zello channel (https://zello.com/ZelloRoLink) by bringing in information regarding the currently talking svxlink node.
+This code is supposed to help enhance the RoLink.network crosslinked Zello channel (https://zello.com/ZelloRoLink) by sending text information regarding the currently talking svxlink node.
