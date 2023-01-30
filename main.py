@@ -7,7 +7,7 @@ import aiohttp
 import socket
 import configparser
 
-RWS_ENDPOINT = "wss://svx.439100.ro/wssx/"
+RWS_ENDPOINT = "wss://RoLink.network/wssx/"
 ZWS_ENDPOINT = "wss://zello.io/ws"
 ZWS_TIMEOUT_SEC = 2
 
@@ -84,16 +84,13 @@ async def help_channel(username, password, token, channel):
                         data = json.loads(msg.data)
                         if "command" in data and "from" in data:
                             if data["command"] == "on_stream_start" and data["from"] == "RoLink GW":
-#                            if data["command"] == "on_stream_start" and data["from"] == "Yo3AGC":
                                 session = aiohttp.ClientSession()
                                 async with session.ws_connect(RWS_ENDPOINT) as rws:
                                     async for msg in rws:
                                         if msg.type == aiohttp.WSMsgType.TEXT:
                                             data = json.loads(msg.data)
-#                                            print(data)
                                             if "talker" in data:
                                                 current_talker=data["talker"]["c"]
-#                                                print(current_talker)
                                                 if current_talker!=last_talker:
                                                     msg_txt = "Vorbeste: "+current_talker
                                                     print(msg_txt)
