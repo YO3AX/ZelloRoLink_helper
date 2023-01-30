@@ -8,6 +8,7 @@ import aiohttp
 import socket
 import configparser
 import logging
+from datetime import datetime
 
 logging.basicConfig(filename='helper.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
 
@@ -96,8 +97,10 @@ async def help_channel(username, password, token, channel):
                                             if "talker" in data:
                                                 current_talker=data["talker"]["c"]
                                                 if current_talker!=last_talker:
-                                                    msg_txt = "Vorbeste: "+current_talker
-                                                    log_txt = msg_txt + " @ " + datetime.datetime.now()
+                                                    msg_txt = "În emisie: "+current_talker
+                                                    now = datetime.now()
+                                                    current_time = now.strftime("%Y-%M-%D %H:%M:%S")
+                                                    log_txt = msg_txt + " at " + current_time
                                                     print(log_txt)
                                                     await zws.send_str(json.dumps({
                                                         "command": "send_text_message",
