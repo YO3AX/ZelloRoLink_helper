@@ -27,13 +27,6 @@ def main():
     try:
         loop.run_until_complete(help_channel(username, password, token, channel))
     except KeyboardInterrupt:
-        # try:
-            # if ZelloWS and ZelloStreamID:
-                # loop.run_until_complete(zello_stream_stop(ZelloWS, ZelloStreamID))
-
-        # except aiohttp.client_exceptions.ClientError as error:
-            # print("Error during stopping. ", error)
-
         def shutdown_exception_handler(loop, context):
             if "exception" in context and isinstance(context["exception"], asyncio.CancelledError):
                 return
