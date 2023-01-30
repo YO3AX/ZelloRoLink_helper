@@ -13,7 +13,6 @@ ZWS_TIMEOUT_SEC = 2
 
 def main():
     try:
-        os.chdir("/home/yo3agc/ZelloRoLink")
         config = configparser.ConfigParser()
         config.read('helper.conf')
         username = config['zello']['username']
