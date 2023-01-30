@@ -7,6 +7,9 @@ import datetime
 import aiohttp
 import socket
 import configparser
+import logging
+
+logging.basicConfig(filename='helper.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
 
 RWS_ENDPOINT = "wss://RoLink.network/wssx/"
 ZWS_ENDPOINT = "wss://zello.io/ws"
