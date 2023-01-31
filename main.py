@@ -78,6 +78,9 @@ async def help_channel(username, password, token, channel):
     global ZelloWS
     last_talker=None
     try:
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %H:%M:%S:")
+        print(f"Started at {current_time}")
         conn = aiohttp.TCPConnector(family = socket.AF_INET, ssl = False)
         async with aiohttp.ClientSession(connector = conn) as session:
             async with session.ws_connect(ZWS_ENDPOINT) as zws:
@@ -99,7 +102,7 @@ async def help_channel(username, password, token, channel):
                                                 if current_talker!=last_talker:
                                                     msg_txt = "În emisie: "+current_talker
                                                     now = datetime.now()
-                                                    current_time = now.strftime("%Y-%M-%D %H:%M:%S")
+                                                    current_time = now.strftime("%Y-%m-%d %H:%M:%S:")
                                                     log_txt = msg_txt + " at " + current_time
                                                     print(log_txt)
                                                     await zws.send_str(json.dumps({
