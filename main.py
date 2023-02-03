@@ -119,5 +119,11 @@ async def help_channel(username, password, token, channel):
     except asyncio.TimeoutError:
         print("Communication timeout")
 
+# "if __name__ == "__main__":" In Short: It Allows You to Execute Code When the File Runs as a Script, but Not When It’s Imported as a Module
+#In the top-level code environment, the value of __name__ is "__main__".
+#In an imported module, the value of __name__ is the module’s name as a string.
 if __name__ == "__main__":
+    print("running as a script (not as a module")
     main()
+else:
+    print("not running as a script (probably running as a module")
