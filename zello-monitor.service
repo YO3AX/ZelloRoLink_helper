@@ -1,0 +1,16 @@
+[Unit]
+Description=Zello Monitor Service
+After=network-online.service
+
+[Service]
+User=root
+Type=simple
+# Change the paths if other than "/opt/zello-monitor"
+WorkingDirectory=/opt/zello-monitor
+ExecStart=/usr/local/bin/python /opt/zello-monitor/zello-monitor.py
+Restart=always
+RestartSec=60
+TimeoutStartSec=3
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+{
+    "ZC_USERNAME": "...",
+    "ZC_PASSWORD": "...",
+    "ZC_CHANNEL": "...",
+    "ZC_ISSUER": "...",
+    "ZWS_ENDPOINT": "wss://zello.io/ws",
+    "RWS_ENDPOINT": "wss://localhost/ws",
+    "ZM_WS_FILE": "/dev/null",
+    "RC_NAME": "RemoteCallsign",
+    "ZC_NAME": "ZelloCallsign",
+    "ZM_CLIENTS_FILE": "/dev/null",
+    "ZM_TALKER_FILE": "/dev/null",
+    "LOGFILE": "/var/log/zello-monitor.log"
+}
