@@ -173,9 +173,9 @@ async def data_bridge(ZC_USERNAME, ZC_PASSWORD, ZC_CHANNEL):
 														last_push_ts = now
 													await session.close()
 													break
-						else:
-							#do stuff from svxlink
-							pass #for now
+							else:
+								#do stuff from svxlink
+								pass #for now
 	except asyncio.TimeoutError:
 		logging.warning('Communication timeout')
 		time.sleep(12)
