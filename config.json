@@ -4,7 +4,7 @@
     "ZC_CHANNEL": "...",
     "ZC_ISSUER": "...",
     "ZWS_ENDPOINT": "wss://zello.io/ws",
-    "RWS_ENDPOINT": "wss://localhost/ws",
+    "RWS_ENDPOINT": "svxlink",
     "ZM_WS_FILE": "/dev/null",
     "RC_NAME": "RemoteCallsign",
     "ZC_NAME": "ZelloCallsign",
