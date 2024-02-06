@@ -148,34 +148,34 @@ async def data_bridge(ZC_USERNAME, ZC_PASSWORD, ZC_CHANNEL):
 								wtf(ZM_TALKER_FILE, data["from"].strip().upper())
 								logging.info(f'Voice session received from Zello talker ({current_talker})')
 						if "command" in data and "from" in data:
-							if data["command"] == "on_stream_start" and data["from"] == ZC_NAME and RWS_ENDPOINT != "svxlink":
-								session = aiohttp.ClientSession()
-								async with session.ws_connect(RWS_ENDPOINT) as rws:
-									async for msg in rws:
-										if msg.type == aiohttp.WSMsgType.TEXT:
-											data = json.loads(msg.data)
-											if "talker" in data:
-												if data["talker"]["t"] == 0:
-													await session.close()
-													break
-												if data["talker"]["c"] != RC_NAME:
-													now = int(time.time())
-													current_talker = data["talker"]["c"]
-													if now - last_push_ts >= 6:
-														logging.info(f'Voice session received from RoLink talker ({current_talker})')
-														msg_txt = 'În emisie: ' + current_talker
-														await zws.send_str(json.dumps({
-															"command": "send_text_message",
-															"seq": 3,
-															"channel": ZC_CHANNEL,
-															"text": msg_txt
-														}))
-														last_push_ts = now
-													await session.close()
-													break
-							else:
-								#do stuff from svxlink
-								pass #for now
+							if data["command"] == "on_stream_start" and data["from"] == ZC_NAME:
+                                if  RWS_ENDPOINT == "svxlink":
+                                    pass #get the info from sqv log and send in channel
+                                else:
+                                    session = aiohttp.ClientSession()
+                                    async with session.ws_connect(RWS_ENDPOINT) as rws:
+                                        async for msg in rws:
+                                            if msg.type == aiohttp.WSMsgType.TEXT:
+                                                data = json.loads(msg.data)
+                                                if "talker" in data:
+                                                    if data["talker"]["t"] == 0:
+                                                        await session.close()
+                                                        break
+                                                    if data["talker"]["c"] != RC_NAME:
+                                                        now = int(time.time())
+                                                        current_talker = data["talker"]["c"]
+                                                        if now - last_push_ts >= 6:
+                                                            logging.info(f'Voice session received from RoLink talker ({current_talker})')
+                                                            msg_txt = 'În emisie: ' + current_talker
+                                                            await zws.send_str(json.dumps({
+                                                                "command": "send_text_message",
+                                                                "seq": 3,
+                                                                "channel": ZC_CHANNEL,
+                                                                "text": msg_txt
+                                                            }))
+                                                            last_push_ts = now
+                                                        await session.close()
+                                                        break
 	except asyncio.TimeoutError:
 		logging.warning('Communication timeout')
 		time.sleep(12)
