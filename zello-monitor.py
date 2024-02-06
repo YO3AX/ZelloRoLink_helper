@@ -150,7 +150,7 @@ async def data_bridge(ZC_USERNAME, ZC_PASSWORD, ZC_CHANNEL):
 						if "command" in data and "from" in data:
 							if data["command"] == "on_stream_start" and data["from"] == ZC_NAME:
                                 if  RWS_ENDPOINT == "svxlink":
-                                    pass #get the info from sqv log and send in channel
+                                    pass #get the info from sqx log and send in channel
                                 else:
                                     session = aiohttp.ClientSession()
                                     async with session.ws_connect(RWS_ENDPOINT) as rws:
