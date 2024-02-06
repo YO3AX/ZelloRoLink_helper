@@ -148,7 +148,7 @@ async def data_bridge(ZC_USERNAME, ZC_PASSWORD, ZC_CHANNEL):
 								wtf(ZM_TALKER_FILE, data["from"].strip().upper())
 								logging.info(f'Voice session received from Zello talker ({current_talker})')
 						if "command" in data and "from" in data:
-							if data["command"] == "on_stream_start" and data["from"] == ZC_NAME:
+							if data["command"] == "on_stream_start" and data["from"] == ZC_NAME and RWS_ENDPOINT != "svxlink":
 								session = aiohttp.ClientSession()
 								async with session.ws_connect(RWS_ENDPOINT) as rws:
 									async for msg in rws:
@@ -173,6 +173,9 @@ async def data_bridge(ZC_USERNAME, ZC_PASSWORD, ZC_CHANNEL):
 														last_push_ts = now
 													await session.close()
 													break
+						else:
+							#do stuff from svxlink
+							pass #for now
 	except asyncio.TimeoutError:
 		logging.warning('Communication timeout')
 		time.sleep(12)
