@@ -141,7 +141,7 @@ async def data_bridge(ZC_USERNAME, ZC_PASSWORD, ZC_CHANNEL):
 								wtf(ZM_CLIENTS_FILE, user_count)
 								logging.info(f'Online users update received ({user_count})')
 						if "command" in data and "from" in data:
-							if data["command"] == "on_stream_start" and data["from"] != ZC_NAME:
+							if data["command"] == "on_stream_start" and data["from"] != ZC_NAME and RWS_ENDPOINT != "svxlink":
 								current_talker = data["from"]
 								wsdata = {'zello': {'command': 'on_stream_start', 'from': current_talker}}
 								wtf(ZM_WS_FILE, json.dumps(wsdata), n=True)
